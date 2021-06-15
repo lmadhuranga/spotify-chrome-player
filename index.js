@@ -12,9 +12,10 @@ $(document).ready(function(){
 		};
 		function submitData(_settings) {  
 			console.log(`msg_ _settings`,settings);
-			$.ajax(settings).done(function (response) {
+			$.ajax(settings)
+			.done(function (response) {
 				console.log(response);
-			});
+			}) 
 		}
 		var deviceId = '?device_id=dd0912c69cdee7516a8e038da34f103dad6a6330'
     $("#prev").click(function(){
@@ -90,22 +91,39 @@ $(document).ready(function(){
 			}
 			return text;
 		};
+		
 
-		// var userProfileSource = document.getElementById('user-profile-template').innerHTML,
-		//     userProfileTemplate = Handlebars.compile(userProfileSource),
-		//     userProfilePlaceholder = document.getElementById('user-profile');
+		function loadLogin() {
+			
+			var client_id = '8d0eabf6d4a647f1a6113a3e3b07168d'; // Your client id
+			var redirect_uri = 'http://127.0.0.1:5500'; // Your redirect uri
 
-		//     oauthSource = document.getElementById('oauth-template').innerHTML,
-		//     oauthTemplate = Handlebars.compile(oauthSource),
-		//     oauthPlaceholder = document.getElementById('oauth');
+			var state = generateRandomString(16);
 
-		var params = getHashParams();
+			localStorage.setItem(stateKey, state);
+			var scope = 'user-read-private user-read-email user-modify-playback-state playlist-modify-public';
 
-		var access_token = params.access_token,
-				state = params.state,
-				storedState = localStorage.getItem(stateKey);
+			var url = 'https://accounts.spotify.com/authorize';
+			url += '?response_type=token';
+			url += '&client_id=' + encodeURIComponent(client_id);
+			url += '&scope=' + encodeURIComponent(scope);
+			url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
+			url += '&state=' + encodeURIComponent(state);
 
-		if (access_token && (state == null || state !== storedState)) {
+			window.location = url;
+		}
+
+		var params = getHashParams(); 
+		var access_token = '';
+		if(params.hasOwnProperty('access_token')) {
+			localStorage.setItem('access_token', params.access_token);
+			access_token = params.access_token;
+		}
+		else if(localStorage.getItem('access_token')!=null) {
+			access_token = localStorage.getItem('access_token');
+		} 
+
+		if (access_token==null) {
 			window.location = '?msg=There was an error during the authentication'
 		} else {
 			localStorage.removeItem(stateKey);
@@ -117,36 +135,16 @@ $(document).ready(function(){
 						headers: {
 							'Authorization': 'Bearer ' + access_token
 						},
-						success: function(response) {
-							// userProfilePlaceholder.innerHTML = userProfileTemplate(response);
-
-							$('#login').hide();
-							$('#loggedin').show();
+						success: function(response) { 
+							$('#login-button').hide(); 
 						}
 				});
-			} else {
-					$('#login').show();
-					$('#loggedin').hide();
+			} else { 
+					$('#login-button').show();
 			}
 
 			document.getElementById('login-button').addEventListener('click', function() {
-
-				var client_id = '8d0eabf6d4a647f1a6113a3e3b07168d'; // Your client id
-				var redirect_uri = 'http://127.0.0.1:5500'; // Your redirect uri
-
-				var state = generateRandomString(16);
-
-				localStorage.setItem(stateKey, state);
-				var scope = 'user-read-private user-read-email user-modify-playback-state playlist-modify-public';
-
-				var url = 'https://accounts.spotify.com/authorize';
-				url += '?response_type=token';
-				url += '&client_id=' + encodeURIComponent(client_id);
-				url += '&scope=' + encodeURIComponent(scope);
-				url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
-				url += '&state=' + encodeURIComponent(state);
-
-				window.location = url;
+				loadLogin();
 			}, false);
 		}
     
