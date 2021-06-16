@@ -1,0 +1,72 @@
+{
+    "name": "New Tab",
+    "version": "0.0.1",
+    "manifest_version": 2,
+    "description": "Press A to get started",
+    "background": {
+        "scripts": [
+            "jquery.js",
+            "background.js"
+        ],
+        "persistent": false
+    },
+    "browser_action": {
+        "default_title": "New Tab",   
+        "default_popup": "popup.html"
+    },
+    "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
+    "permissions": [
+      "identity"
+    ],
+    "commands": {
+        "spotify-like": {
+          "suggested-key": {
+            "default": "Alt+K"
+          },
+          "description": "Spotify Like"
+        },
+        "spotify-previous": {
+          "NO-suggested-key": {
+            "default": "Alt+P"
+          },
+          "description": "Spotify previous"
+        },
+        "spotify-play": {
+          "NO-suggested-key": {
+            "default": "Alt+N"
+          },
+          "description": "Spotify Play"
+        },
+        "spotify-pause": {
+          "NO-suggested-key": {
+            "default": "Alt+N"
+          },
+          "description": "Spotify Pause"
+        },
+        "spotify-next": {
+          "NO-suggested-key": {
+            "default": "Alt+N"
+          },
+          "description": "Spotify Next"
+        }, 
+        "spotify-v0": {
+          "NO-suggested-key": {
+            "default": "Alt+P"
+          },
+          "description": "Spotify V0"
+        },
+        "spotify-v50": {
+          "NO-suggested-key": {
+            "default": "Alt+P"
+          },
+          "description": "Spotify V50"
+        },
+        "spotify-v100": {
+          "NO-suggested-key": {
+            "default": "Alt+P"
+          },
+          "description": "Spotify v100"
+        }
+      }
+
+}
