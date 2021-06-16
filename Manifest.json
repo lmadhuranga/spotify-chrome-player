@@ -27,13 +27,13 @@
         },
         "spotify-previous": {
           "NO-suggested-key": {
-            "default": "Ctrl + Shift + V"
+            "default": "Ctrl+Shift+V"
           },
           "description": "Spotify previous"
         },
         "spotify-play": {
-          "NO-suggested-key": {
-            "default": "Ctrl + Shift + Space"
+          "suggested-key": {
+            "default": "Ctrl+Shift+Space"
           },
           "description": "Spotify Play"
         },
@@ -45,25 +45,25 @@
         },
         "spotify-next": {
           "NO-suggested-key": {
-            "default": "Ctrl + Shift + N"
+            "default": "Ctrl+Shift+N"
           },
           "description": "Spotify Next"
         }, 
         "spotify-v0": {
-          "NO-suggested-key": {
-            "default": "Ctrl + Shift + M"
+          "suggested-key": {
+            "default": "Ctrl+Shift+M"
           },
           "description": "Spotify V0"
         },
         "spotify-v50": {
-          "NO-suggested-key": {
-            "default": "Ctrl + Shift + Comma"
+          "suggested-key": {
+            "default": "Ctrl+Shift+Comma"
           },
           "description": "Spotify V50"
         },
         "spotify-v100": {
-          "NO-suggested-key": {
-            "default": "Ctrl + Shift + Period"
+          "suggested-key": {
+            "default": "Ctrl+Shift+Period"
           },
           "description": "Spotify v100"
         }
