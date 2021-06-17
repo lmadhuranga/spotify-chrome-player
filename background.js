@@ -14,15 +14,21 @@ var settings = {
 };
 
 function submitData() {  
-    console.log(`msg_ _settings`,settings);
-    jQuery.ajax(settings)
-    .done(function (response) {
-        console.log(response);
-    }) 
+    $.ajax({
+        success: function(returnData){ 
+            console.log(`msg_ returnData`,returnData);
+        },
+        error: function(xhr, status, error){
+            var errorMessage = xhr.status + ': ' + xhr.statusText
+            alert('Spotify Error - ' + errorMessage);
+        },
+        ...settings
+   });
+ 
 }
 
 function next() {
-    console.log(`msg_ play next track`);
+    console.log(`msg_ next track`);
     settings['url'] = `${host}/next${deviceId}`;
 	submitData()
 }
